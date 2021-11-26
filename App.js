@@ -2,11 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useContext, useEffect, useState} from 'react';
 import { Text, View, Button } from 'react-native';
 import styles from './Style';
+import { GlobalDataContext } from './GlobalDataContext';
 import BeerScreen from './BeerScreen';
 import BeerScreen2 from './BeerScreen2';
 
-//Creeër de Context.
-export const GlobalDataContext = React.createContext([]);
 
 //De main applicatie
 export default function App() {

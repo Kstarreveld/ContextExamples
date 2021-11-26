@@ -1,11 +1,12 @@
-// Dit is een andere manier om hetzelfde te doen als in BeerScreen , nu maak ik direct gebruik van useContext.
+// Dit is een andere manier om hetzelfde te doen als in BeerScreen , nu maak ik direct gebruik van useContext,
+// Deze methode is veel korter en minder omslachtig.
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 
 import { StyleSheet, Text, View, Button } from 'react-native';
 import styles from './Style';
 import { useContext } from 'react';
-import { GlobalDataContext } from './App';
+import { GlobalDataContext } from './GlobalDataContext';
 
 
 export default function BeerScreen2 () {

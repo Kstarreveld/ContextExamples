@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 import { StyleSheet, Text, View, Button } from 'react-native';
 import styles from './Style';
-import { GlobalDataContext } from './App';
+import { GlobalDataContext } from './GlobalDataContext';
 
 export default function BeerScreen () {
   
