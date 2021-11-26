@@ -6,8 +6,7 @@ import styles from './Style';
 import { GlobalDataContext } from './GlobalDataContext';
 
 export default function BeerScreen () {
-  
-  
+   
     return (
       <View style={styles.container}>
         <GlobalDataContext.Consumer>
