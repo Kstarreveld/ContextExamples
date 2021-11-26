@@ -1,58 +1,52 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Text, View, Button } from 'react-native';
+import styles from './Style';
+import BeerScreen from './BeerScreen';
+import BeerScreen2 from './BeerScreen2';
 
-const MyContext = React.createContext("init");
+export const GlobalDataContext = React.createContext([]);
 
-const  Child = () => {
-  const [own, setOwn] =useState("own");
 
-  return (
-    <View style={styles.container}>
-      <Text>{own}</Text>
-      <Text>in Child</Text>
-      <MyContext.Consumer>
-      { 
-        ({ data, counter})=>{setOwn(counter); return(
-         <View>
-           <Text>{data}</Text>
-           <Text>{counter}</Text>
-          </View>)}
-        
-      }
-      </MyContext.Consumer>
 
-      <StatusBar style="auto" />
-    </View>);
-
-}
 
 export default function App() {
-  const [welcome, setWelcome] = useState("init");
-  const [counter, setCounter ] = useState(1);
+  const [bierData, setBierData] = useState();
+ 
+  useEffect(() => {
+    // Update the document title using the browser API
+        getBeer();
+  }, []);
+
+  const getBeer = async() =>
+  {
+     return await fetch( "http://15euros.nl/csp2/modules/api_basic.php")
+        .then(response => response.json()) 
+        .then(json => {
+            setBierData(json)
+            console.log("HALLO");
+        })
+        .catch ( err =>console.log(err));
+  }
+
+  const value = {
+    bierData,
+    setBierData
+  }
 
   return (
     <View style={styles.container}>
-      <Text>{welcome}</Text>
-      <Button onPress={()=>{setWelcome("pressed"); setCounter(counter+1)}} title="test"/>
-      
-      <MyContext.Provider value={({ welcome,counter })}>
-          <Child/>
-      </MyContext.Provider>
+      <Text>Bier</Text>
+      <Text>{ bierData? bierData[0].naam:"leeg"}</Text>
+      <GlobalDataContext.Provider value={bierData}>
+        <BeerScreen/>
+        <BeerScreen2/>
+      </GlobalDataContext.Provider>
      
-     
+      <Text>{ "leeg"}</Text>
       <StatusBar style="auto" />
      
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
